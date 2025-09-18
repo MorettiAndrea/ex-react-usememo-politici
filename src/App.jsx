@@ -19,9 +19,10 @@ export default function App() {
   }, []);
 
   const filtredData = data.filter((p) => {
-    return p.name
-      .toLocaleLowerCase()
-      .includes(searchedWord.toLocaleLowerCase());
+    return (
+      p.name.toLowerCase().includes(searchedWord.toLowerCase()) ||
+      p.biography.toLowerCase().includes(searchedWord.toLowerCase())
+    );
   });
 
   return (
