@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 const baseUrl = "http://localhost:3333/politicians";
 export default function App() {
+  const [searchedWord, setSearchedWord] = useState("");
   const [data, setData] = useState([]);
   function fetchApi(url) {
     fetch(url)
@@ -9,15 +10,35 @@ export default function App() {
       .catch((err) => console.error(err));
   }
 
+  const onChange = (e) => {
+    setSearchedWord(e.target.value);
+  };
+
   useEffect(() => {
     fetchApi(baseUrl);
   }, []);
+
+  const filtredData = data.filter((p) => {
+    return p.name
+      .toLocaleLowerCase()
+      .includes(searchedWord.toLocaleLowerCase());
+  });
+
   return (
     <>
       <div className="container">
-        <h1 className="text-center">Lista politici</h1>
+        <h1 className="text-center my-5">Lista politici</h1>
+        <div className="d-center flex-direction-column">
+          <label htmlFor="Search">Filtra per nome </label>
+          <input
+            className="my-3"
+            type="text"
+            value={searchedWord}
+            onChange={onChange}
+          />
+        </div>
         <div className="row">
-          {data.map((politician, index) => {
+          {filtredData.map((politician, index) => {
             return (
               <div className="col-4">
                 <div className="card" key={index}>
