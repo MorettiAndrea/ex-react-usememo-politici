@@ -6,6 +6,7 @@ const baseUrl = "http://localhost:3333/politicians";
 export default function App() {
   const [searchedWord, setSearchedWord] = useState("");
   const [data, setData] = useState([]);
+  const [selectedPosition, setSelectedPosition] = useState("");
 
   useEffect(() => {
     fetch(baseUrl)
