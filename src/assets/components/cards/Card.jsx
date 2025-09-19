@@ -1,4 +1,6 @@
-export default function Card(props) {
+import React from "react";
+
+function Card(props) {
   return (
     <div className="col-4">
       <div className="card">
@@ -20,3 +22,4 @@ export default function Card(props) {
     </div>
   );
 }
+export default React.memo(Card);
